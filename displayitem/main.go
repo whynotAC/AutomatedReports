@@ -8,6 +8,7 @@ import (
 
 func init() {
 	http.HandleFunc("/v1/displaydata", handlers.DisplayDataHandler)
+	http.HandleFunc("/v1/displaybyclient", handlers.DisplayDataByPic)
 }
 
 func main() {

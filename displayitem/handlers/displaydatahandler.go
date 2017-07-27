@@ -55,3 +55,13 @@ Error:
 	wr.Execute(w, nil)
 NoError:
 }
+
+func DisplayDataByPic(w http.ResponseWriter, r *http.Request) {
+	wr, _ := template.ParseFiles("./templatesfile/base.html", "./templatesfile/pagehtml/displaybypic.html")
+	data := struct {
+		Title string
+	}{
+		Title: "获取内容可视化",
+	}
+	wr.ExecuteTemplate(w, wr.Name(), data)
+}

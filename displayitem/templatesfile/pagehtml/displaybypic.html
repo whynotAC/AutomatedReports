@@ -1,0 +1,93 @@
+{{define "BodyInfo"}}
+<div id="main" style="width: 600px;height: 400px;" align="center"></div>
+<script type="text/javascript">
+	var divwidth;
+	var divheight;
+	if (window.innerWidth)
+		divwidth = window.innerWidth;
+	else if ((document.body) && (document.body.clientWidth))
+		divwidth = document.body.clientWidth;
+	
+	if (window.innerHeight)
+		divheight = window.innerHeight;
+	else if ((document.body) && (document.body.clientHeight))
+		divheight = document.body.clientHeight;
+		
+	if (document.documentElement  && document.documentElement.clientHeight && document.documentElement.clientWidth)
+	{
+		divheight = document.documentElement.clientHeight;
+		divwidth = document.documentElement.clientWidth;
+	}
+	divheight -= 50;
+	divwidth -= 50;
+	var divElement = document.getElementById('main');
+	divElement.style.width = (divwidth)  + 'px';
+	divElement.style.height = (divheight) + 'px';
+	var myChart = echarts.init(document.getElementById('main'));
+	var option = {
+		title: {
+			text: '埋点分布热力图',
+			textStyle: {
+				color: '#ccc',
+				fontStyle: 'normal',
+				fontWeight: 'bolder',
+				fontSize: 18
+			},
+			left: 'center',
+			zlevel: 0,
+			z: 2
+		},
+		xAxis: {
+			show: false,
+			type: 'value',
+			nameTextStyle: {
+				color: '#fff'
+			},
+			data: [ 10, 20, 30, 40, 50]
+		},
+		yAxis: {
+			show: false,
+			type: 'value',
+			nameTextStyle: {
+				color: '#fff'
+			},
+			data: [ 10, 20, 30, 40, 50]
+		},
+		backgroundColor: '#404a59',
+		visualMap: {
+			type: 'piecewise',
+			splitNumber: 5,
+			min: 0,
+			max: 50,
+			inRange: {
+				color: ['#d94e5d','#eac736','#50a3ba'].reverse()
+			},
+			textStyle: {
+				color: '#d94e5d'
+			}
+		},
+		graphic: [
+			{
+            	type: 'image',
+            	id: 'basicpic',
+            	z: -10,
+            	bounding: 'all',
+            	origin: [75, 75],
+            	style: {
+                	image: '/static/pic/pic.jpg',
+                	width: divwidth,
+					height: divheight,
+                	opacity: 0.7
+            	}
+        	}
+		],
+		series: [{
+            name: 'hitpos',
+            type: 'heatmap',
+			coordinateSystem: 'cartesian2d',
+            data:[[30,30,45], [30.5,30,45], [31,30,44], [29.5,30,43], [29,30,43], [30,30.5,42], [30,31,43], [30,29.5,46], [30,29,46], [29.5,29.5,46], [29,29.5,46], [29,31,46], [29,28,46], [29,29.5,46], [29.8,29.5,46]]
+        }]
+	};
+	myChart.setOption(option);
+</script>
+{{end}}
